@@ -1,17 +1,17 @@
 /**
-    Cucca Game Engine - TerrainDemo - HeightMap_Init_Default.hpp
+    Cucca Game Engine - TerrainDemo - TerrainChunk_Init_Default.hpp
 
     This file is subject to the terms and conditions defined in
     file 'LICENSE.txt', which is part of this source code package.
 
 
     This file is a resource initialization file.
-    It specifies HeightMapInitInfo_Default struct and HeightMap init
+    It specifies TerrainChunkInitInfo_Default struct and TerrainChunk init
     and destroy member function template specializations for initializing
-    HeightMap resources.
+    TerrainChunk resources.
 
     Initialization resources:
-        0: Binary (major texture)
+        0: VertexData (for terrain segments)
     Dependency resources:
         none
 
@@ -22,11 +22,11 @@
 **/
 
 
-#ifndef CUCCA_TERRAINDEMO_HEIGHTMAP_INIT_DEFAULT_HPP
-#define CUCCA_TERRAINDEMO_HEIGHTMAP_INIT_DEFAULT_HPP
+#ifndef CUCCA_TERRAINDEMO_TERRAINCHUNK_INIT_DEFAULT_HPP
+#define CUCCA_TERRAINDEMO_TERRAINCHUNK_INIT_DEFAULT_HPP
 
 
-#include "HeightMap.hpp"
+#include "TerrainChunk.hpp"
 #include <Cucca/Core/ResourceManager.hpp>
 #include <Cucca/Core/Binary.hpp>
 
@@ -34,20 +34,12 @@
 namespace Cucca {
 
     /// Initialization info struct
-    struct HeightMapInitInfo_Default : public ResourceInitInfoBase {
-        unsigned numXSegments;
-        unsigned numYSegments;
-        unsigned segmentXResolution;
-        unsigned segmentYResolution;
-        float segmentXSize;
-        float segmentYSize;
-        float offsetX;
-        float offsetY;
+    struct TerrainChunkInitInfo_Default : public ResourceInitInfoBase {
     };
 
 
     /// Resource init and destroy template member function specializations
-    CUCCA_RESOURCE_INIT(HeightMap, HeightMapInitInfo_Default) {
+    CUCCA_RESOURCE_INIT(TerrainChunk, TerrainChunkInitInfo_Default) {
         if (initResources.size() < 1)
             return; // TODO_EXCEPTION: maybe throw a proper exception instead?
 
@@ -65,9 +57,10 @@ namespace Cucca {
         major_.loadFromMemory(majorBinary->getBufferPtr(), majorBinary->getBufferSize());
     }
 
-    CUCCA_RESOURCE_DESTROY(HeightMap, HeightMapInitInfo_Default) {}
+    CUCCA_RESOURCE_DESTROY(TerrainChunk, TerrainChunkInitInfo_Default) {}
 
 } // namespace Cucca
 
 
-#endif // CUCCA_TERRAINDEMO_HEIGHTMAP_INIT_DEFAULT_HPP
+#endif // CUCCA_TERRAINDEMO_TERRAINCHUNK_INIT_DEFAULT_HPP
+
